@@ -127,7 +127,7 @@ class CupertinoImageAspectRatioToolbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: controller.aspectRatioNotifier,
-      builder: (context, _, __) => Column(
+      builder: (context, _, _) => Column(
         children: [
           Row(
             mainAxisSize: MainAxisSize.min,

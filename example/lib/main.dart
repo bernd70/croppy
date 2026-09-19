@@ -92,22 +92,25 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> _pickImage() async {
-    final result = await FilePicker.platform.pickFiles(
-      type: FileType.image,
-      allowMultiple: false,
-    );
+    final file = await FilePicker.pickFile(type: FileType.image);
 
-    if (result != null && result.files.isNotEmpty) {
-      final path = result.files.first.path!;
-
-      if (kIsWeb) {
-        _imageProviders.insert(0, NetworkImage(path));
-      } else {
-        _imageProviders.insert(0, FileImage(File(path)));
-      }
-
-      setState(() {});
+    if (file == null) {
+      return;
     }
+
+    final path = file.path;
+
+    if (path == null) {
+      return;
+    }
+
+    if (kIsWeb) {
+      _imageProviders.insert(0, NetworkImage(path));
+    } else {
+      _imageProviders.insert(0, FileImage(File(path)));
+    }
+
+    setState(() {});
   }
 
   @override
